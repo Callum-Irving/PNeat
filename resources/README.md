@@ -1,4 +1,4 @@
-## How to install ##library.name##
+## How to install PNeat
 
 ### Install with the Contribution Manager
 
@@ -14,25 +14,25 @@ By default the following locations are used for your sketchbook folder:
   * For Mac users, the sketchbook folder is located inside `~/Documents/Processing` 
   * For Windows users, the sketchbook folder is located inside `My Documents/Processing`
 
-Download ##library.name## from ##library.url##
+Download PNeat from [here](https://github.com/Callum-Irving/PNeat)
 
 Unzip and copy the contributed Library's folder into the `libraries` folder in the Processing sketchbook. You will need to create this `libraries` folder if it does not exist.
 
-The folder structure for Library ##library.name## should be as follows:
+The folder structure for Library PNeat should be as follows:
 
 ```
 Processing
   libraries
-    ##library.name##
+    PNeat
       examples
       library
-        ##library.name##.jar
+        PNeat.jar
       reference
       src
 ```
              
-Some folders like `examples` or `src` might be missing. After Library ##library.name## has been successfully installed, restart the Processing application.
+Some folders like `examples` or `src` might be missing. After Library PNeat has been successfully installed, restart the Processing application.
 
 ### Troubleshooting
 
-If you're having trouble, have a look at the [Processing Wiki](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library) for more information, or contact the author [##author.name##](##author.url##).
+If you're having trouble, have a look at the [Processing Wiki](https://github.com/processing/processing/wiki/How-to-Install-a-Contributed-Library) for more information, or contact the author [Callum Irving](https://callumirving.vercel.app).

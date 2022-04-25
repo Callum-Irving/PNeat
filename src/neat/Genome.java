@@ -58,6 +58,9 @@ public class Genome {
 		float e = 1; // The number of excess genes
 		float d = 1; // The number of disjoint genes
 		float w = 1; // The average difference of weights in matching genes (including disabled)
+		
+		// TODO
+		
 		return (c1 * e / n) + (c2 * d / n) + (c3 * w);
 	}
 

@@ -6,10 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/usr/share/processing/core/library/core.jar">
-		<attributes>
-			<attribute name="module" value="true"/>
-		</attributes>
-	</classpathentry>
+	<classpathentry kind="lib" path="core.jar"/>
 	<classpathentry kind="output" path="resources/code"/>
 </classpath>
