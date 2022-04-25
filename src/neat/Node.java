@@ -2,7 +2,7 @@ package neat;
 
 import neat.activations.Activation;
 
-class NodeGene {
+class Node {
 	private int id;
 	private Activation activation;
 	private Type type;
@@ -11,7 +11,7 @@ class NodeGene {
 		Input, Hidden, Output
 	}
 
-	public NodeGene(int id) {
+	public Node(int id) {
 		this.id = id;
 	}
 
