@@ -12,7 +12,6 @@ public class Genome {
 	private double fitness = 0.0;
 	private List<Connection> connections;
 	private List<Node> nodes;
-	private int innovationTracker = 0; // TODO: Should be more global (population class)
 	private HashMap<Integer, Double> prevActivations;
 
 	public Genome() {
@@ -27,6 +26,7 @@ public class Genome {
 	 * @return array of outputs
 	 */
 	public double[] predict(double[] inputs) {
+		// TODO: Add network feed-forward
 		// Save previous activations so we can use them for recurrent connections
 		return new double[] {};
 	}
@@ -58,9 +58,9 @@ public class Genome {
 		float e = 1; // The number of excess genes
 		float d = 1; // The number of disjoint genes
 		float w = 1; // The average difference of weights in matching genes (including disabled)
-		
-		// TODO
-		
+
+		// TODO: Implement delta function for genomes
+
 		return (c1 * e / n) + (c2 * d / n) + (c3 * w);
 	}
 
@@ -70,14 +70,15 @@ public class Genome {
 	 * @return string of weights and connections
 	 */
 	public String summarize() {
+		// TODO: Summarize genome
 		return "";
 	}
 
-	// TODO
+	// TODO: Add node mutation
 	protected void addNode() {
 	}
 
-	// TODO
+	// TODO: Add connection mutation
 	protected void addConnection() {
 	}
 
