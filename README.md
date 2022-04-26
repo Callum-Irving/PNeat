@@ -1,3 +1,70 @@
+# PNeat, a NEAT implementation for Processing
+
+## Classes
+
+```java
+class Genome {
+    // Values that can change
+    double fitness;
+    HashMap<Integer, Double> prevActivations;
+
+    // Network structure
+    List<Node> nodes;
+    List<Node> inputs;
+    List<Node> outputs;
+    Activation hiddenActivation;
+    Activation outputActivation;
+
+    // Mutations
+    void addNode() {}
+    void addConnection() {}
+    void adjustWeight() {}
+    void disableConnection() {}
+
+    // Evolution
+    static Genome crossover(Genome a, Genome b) {}
+    static double delta(Genome a, Genome b, double c1, double c2, double c3) {}
+
+    // Running
+    double[] predict(double[] inputs) {}
+
+    // Helpfull stuff
+    String summarize() {}
+}
+
+class Node {
+    int innovation;
+    Type type;
+
+    enum Type {
+        INPUT,
+        HIDDEN,
+        OUTPUT,
+    }
+
+    double sumInputs() {}
+}
+
+class Connection {
+    int innovation;
+    int src, dest;
+    double weight;
+    boolean enabled;
+    boolean recurrent;
+}
+
+class Population {
+    // Needs to manage innovation numbers
+    Connection addConnection(int src, int dest) {}
+    Node addNode(Connection src, Connection dest) {}
+
+    void trainOn(Trainer t) {}
+    void evolve() {}
+}
+```
+
+# Eclipse Template Stuff
+
 The following describes how to set up a Processing Library project in Eclipse and build it successfully, and to make your Library ready for distribution.
 
 ## Import to Eclipse
