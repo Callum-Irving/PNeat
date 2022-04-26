@@ -4,6 +4,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import neat.activations.Activation;
+import neat.activations.ReLU;
+import neat.activations.TanH;
+
 /**
  * This is a class for representing an individual NEAT genome.
  */
@@ -14,9 +18,24 @@ public class Genome {
 	private List<Node> nodes;
 	private HashMap<Integer, Double> prevActivations;
 
-	public Genome() {
+	private Activation hiddenAct;
+	private Activation outputAct;
+
+	public Genome(int numInputs, int numOutputs, Activation hiddenAct, Activation outputAct) {
 		this.connections = new ArrayList<Connection>();
 		this.nodes = new ArrayList<Node>();
+
+		// Add input nodes
+		for (int i = 0; i < numInputs; i++) {
+			this.nodes.add(new Node(i, Node.Type.INPUT));
+		}
+
+		// Add output nodes
+		for (int i = 0; i < numOutputs; i++) {
+			this.nodes.add(new Node(i + numInputs, Node.Type.OUTPUT));
+		}
+
+		// Connect all inputs and outputs
 	}
 
 	/**
@@ -39,7 +58,7 @@ public class Genome {
 	 * @return the child of the two parents
 	 */
 	public static Genome crossover(Genome a, Genome b) {
-		return new Genome(); // TODO: Implement crossover
+		return new Genome(0, 0, new ReLU(), new TanH()); // TODO: Implement crossover
 	}
 
 	/**

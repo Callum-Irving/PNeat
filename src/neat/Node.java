@@ -7,11 +7,11 @@ class Node {
 	private Activation activation;
 	private Type type;
 
-	private enum Type {
-		Input, Hidden, Output
+	public enum Type {
+		INPUT, HIDDEN, OUTPUT
 	}
 
-	public Node(int id) {
+	public Node(int id, Type t) {
 		this.id = id;
 	}
 
