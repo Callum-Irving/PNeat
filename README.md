@@ -63,6 +63,14 @@ class Population {
 }
 ```
 
+## Innovation
+
+Both nodes and connections have innovation numbers. The population maintains the past innovations. Node innovations are determined by the connection that they interrupt. Connection innovations are determined by the source and destination nodes.
+
+## Recurrent Connections
+
+A connection is recurrent if its output leads to its input through other non-recurrent nodes.
+
 # Eclipse Template Stuff
 
 The following describes how to set up a Processing Library project in Eclipse and build it successfully, and to make your Library ready for distribution.

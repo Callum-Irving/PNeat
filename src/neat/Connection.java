@@ -1,11 +1,12 @@
 package neat;
 
 class Connection {
+	private int innovation;
+
 	private int srcId;
 	private int destId;
 	private double weight;
 	private boolean expressed;
-	private int innovation;
 	private boolean recurrent;
 
 	public Connection(int srcId, int destId, int innovation) {
@@ -16,6 +17,10 @@ class Connection {
 		this.weight = Math.random() * 2.0 - 1.0;
 		this.expressed = true;
 		this.recurrent = false;
+	}
+
+	protected void setInnovation(int i) {
+		this.innovation = i;
 	}
 
 	public int getInnovation() {

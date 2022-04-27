@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import neat.activations.Activation;
+import neat.activations.Linear;
 import neat.activations.ReLU;
 import neat.activations.TanH;
 
@@ -14,8 +15,17 @@ import neat.activations.TanH;
 
 public class Genome {
 	private double fitness = 0.0;
+
+	private int nodeCount = 0;
+	private int connectionCount = 0;
+
+	private int numInputs;
+	private int numOutputs;
 	private List<Connection> connections;
 	private List<Node> nodes;
+	private List<Node> inputs;
+	private List<Node> outputs;
+
 	private HashMap<Integer, Double> prevActivations;
 
 	private Activation hiddenAct;
@@ -24,18 +34,25 @@ public class Genome {
 	public Genome(int numInputs, int numOutputs, Activation hiddenAct, Activation outputAct) {
 		this.connections = new ArrayList<Connection>();
 		this.nodes = new ArrayList<Node>();
+		this.hiddenAct = hiddenAct;
+		this.outputAct = outputAct;
 
 		// Add input nodes
 		for (int i = 0; i < numInputs; i++) {
-			this.nodes.add(new Node(i, Node.Type.INPUT));
+			this.addNode(this.nodeCount, Node.Type.INPUT);
 		}
 
 		// Add output nodes
 		for (int i = 0; i < numOutputs; i++) {
-			this.nodes.add(new Node(i + numInputs, Node.Type.OUTPUT));
+			this.addNode(this.nodeCount, Node.Type.OUTPUT);
 		}
 
 		// Connect all inputs and outputs
+		for (Node src : this.inputs) {
+			for (Node dest : this.outputs) {
+				this.addConnection(src.getInnovation(), dest.getInnovation(), this.connectionCount);
+			}
+		}
 	}
 
 	/**
@@ -58,7 +75,15 @@ public class Genome {
 	 * @return the child of the two parents
 	 */
 	public static Genome crossover(Genome a, Genome b) {
-		return new Genome(0, 0, new ReLU(), new TanH()); // TODO: Implement crossover
+		// Ensure a is the fitter genome
+		if (a.fitness < b.fitness) {
+			Genome temp = a;
+			a = b;
+			b = temp;
+		}
+
+		// TODO: Implement crossover
+		return new Genome(a.numInputs, a.numOutputs, a.hiddenAct, a.outputAct);
 	}
 
 	/**
@@ -93,12 +118,28 @@ public class Genome {
 		return "";
 	}
 
-	// TODO: Add node mutation
-	protected void addNode() {
+	protected void addNode(int innovation, Node.Type type) {
+		Node newNode = new Node(innovation, type);
+		switch (type) {
+		case INPUT:
+			this.inputs.add(newNode);
+			this.nodes.add(newNode);
+			break;
+		case OUTPUT:
+			this.outputs.add(newNode);
+			this.nodes.add(newNode);
+			break;
+		case HIDDEN:
+			this.nodes.add(newNode);
+			break;
+		}
+		this.nodeCount++;
 	}
 
 	// TODO: Add connection mutation
-	protected void addConnection() {
+	protected void addConnection(int src, int dest, int innovation) {
+		this.connections.add(new Connection(src, dest, innovation));
+		this.connectionCount++;
 	}
 
 	public double getFitness() {

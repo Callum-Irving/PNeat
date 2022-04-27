@@ -1,13 +1,12 @@
 package neat;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Population {
 	private List<Genome> genomes;
 	private int size;
-	private int innovationCounter;
-	private float compatibilityThreshold;
 	private boolean recurrent;
 
 	// TODO: Initialize these somehow
@@ -16,11 +15,35 @@ public class Population {
 	private float c1 = 1;
 	private float c2 = 1;
 	private float c3 = 1;
+	private float compatibilityThreshold;
 
-	public Population(int size, boolean recurrent) {
+	// Used so that we don't make the same connections with different innovation
+	// numbers.
+	private int connectionInnovation;
+	private HashMap<ConnectionInnovation, Integer> pastConnections;
+	private int nodeInnovation;
+	private HashMap<NodeInnovation, Integer> pastNodes;
+
+	private class ConnectionInnovation {
+		// The innovation numbers of the nodes that the connection connects.
+		int srcInnovation, destInnovation;
+	}
+
+	private class NodeInnovation {
+		// The connection that is interrupted by the node being created.
+		int connectionInnovation;
+	}
+
+	public Population(int size, boolean recurrent, float compatibilityThreshold, int numInputs, int numOutputs) {
 		this.genomes = new ArrayList<Genome>(size);
 		this.size = size;
 		this.recurrent = recurrent;
+		this.compatibilityThreshold = compatibilityThreshold;
+
+		this.nodeInnovation = numInputs + numOutputs;
+		this.connectionInnovation = numInputs * numOutputs;
+		this.pastConnections = new HashMap<ConnectionInnovation, Integer>();
+		this.pastNodes = new HashMap<NodeInnovation, Integer>();
 	}
 
 	public void trainOn(Trainer trainer) {
@@ -38,10 +61,11 @@ public class Population {
 		for (Genome g : this.genomes) {
 			boolean newSpecies = true;
 			for (Species s : species) {
-				if (s.inSpecies(g))
+				if (s.inSpecies(g)) {
 					s.add(g);
-				newSpecies = false;
-				break;
+					newSpecies = false;
+					break;
+				}
 			}
 			if (newSpecies) {
 				species.add(new Species(g));
@@ -121,5 +145,22 @@ public class Population {
 	 */
 	public int size() {
 		return this.size;
+	}
+
+	// MUTATIONS
+	private void mutateGenome(Genome g) {
+		// TODO: Top level mutation function
+	}
+
+	private void mutateAddConnection(Genome g) {
+		// Pick random nodes
+		// Check if innovation has already happened
+		// Add connection to g
+	}
+
+	private void mutateAddNode(Genome g) {
+		// Pick random connection
+		// Check if innovation has already happened
+		// Add node to g
 	}
 }

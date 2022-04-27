@@ -1,21 +1,19 @@
 package neat;
 
-import neat.activations.Activation;
-
 class Node {
-	private int id;
-	private Activation activation;
+	private int innovation;
 	private Type type;
 
 	public enum Type {
 		INPUT, HIDDEN, OUTPUT
 	}
 
-	public Node(int id, Type t) {
-		this.id = id;
+	public Node(int innovation, Type t) {
+		this.innovation = innovation;
+		this.type = t;
 	}
 
-	public int getId() {
-		return this.id;
+	public int getInnovation() {
+		return this.innovation;
 	}
 }
